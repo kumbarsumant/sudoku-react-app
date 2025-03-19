@@ -1,0 +1,67 @@
+@use '../../main.scss' as *;
+
+.board__controller {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: $button-box-shadow;
+}
+
+.button {
+  border: none;
+  outline: none;
+  background-color: $color-white;
+  font-family: inherit;
+  font-weight: 600;
+
+  &--action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-right: 1px solid $color-grey-light;
+    cursor: pointer;
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    &--disabled {
+      cursor: auto;
+      pointer-events: none;
+
+      .icon--action,
+      .button__text {
+        color: $color-grey;
+      }
+    }
+  }
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: scale 0.1s ease-out;
+
+    &:active {
+      scale: 0.85;
+    }
+  }
+
+  &__text {
+    margin-top: 1.6rem;
+    text-transform: uppercase;
+    // font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.icon--action {
+  font-size: 2.5rem;
+  color: $color-primary;
+}

@@ -1,0 +1,34 @@
+// VARIABLES
+$color-primary: #ff0a54;
+$color-primary-light: #ff477e;
+
+$color-black: #0e0004;
+$color-white: #fff;
+$color-grey: #bcbcbc;
+$color-grey-light: #e6e6e9;
+
+$button-box-shadow: 0 0 1.5rem rgba($color-grey, 0.5);
+
+$font-family: 'Quicksand', sans-serif;
+
+// BASE SETTINGS
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1.4;
+  font-family: $font-family;
+  height: 100vh;
+  letter-spacing: 0.15rem;
+}
+
+// UTILITIES

@@ -1,0 +1,43 @@
+@use '../../main.scss' as *;
+
+$button-width: 10.5rem;
+
+.number-pad {
+  display: grid;
+  grid-template-rows: repeat(3, $button-width);
+  grid-template-columns: repeat(3, $button-width);
+  box-shadow: $button-box-shadow;
+
+  .numpad-btn {
+    background-color: $color-white;
+    outline: none;
+    border: none;
+    border-right: 1px solid $color-grey-light;
+    border-bottom: 1px solid $color-grey-light;
+    font-size: 2.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:nth-child(3n) {
+      border-right: 0;
+    }
+
+    &:nth-last-child(-n + 3) {
+      border-bottom: 0;
+    }
+
+    .numpad-btn__container {
+      transition: scale 0.1s ease-out;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:active {
+        scale: 0.7;
+      }
+    }
+  }
+}
