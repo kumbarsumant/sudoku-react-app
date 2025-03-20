@@ -2,28 +2,35 @@ import './App.scss';
 import Board from './components/Board/Board';
 import NumberPad from './components/NumberPad/NumberPad';
 import BoardController from './components/BoardController/BoardController';
+import { useState } from 'react';
+import { ACTIONS } from './constants';
+import solveSudokuPuzzle from './solver';
 
 const App = () => {
-  const matrix = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9],
-  ];
+  const generateEmptyBoard = () => {
+    return Array(9)
+      .fill(0)
+      .map(() => Array(9).fill(0));
+  };
+
+  const [board, setBoard] = useState(generateEmptyBoard);
+
+  const onActionButtonClick = (action) => {
+    if (action === ACTIONS.SOLVE) {
+      setBoard(solveSudokuPuzzle(board));
+    } else if (action === ACTIONS.RESET) {
+      setBoard(generateEmptyBoard());
+    }
+  };
 
   return (
     <div className="app">
       <h1 className="heading">Sudoku Solver</h1>
       <div className="app__container">
         <div className="app__board">
-          <Board matrix={matrix} />
+          <Board board={board} />
           <div className="app__board-actions">
-            <BoardController />
+            <BoardController onClick={onActionButtonClick} />
             <NumberPad />
           </div>
         </div>

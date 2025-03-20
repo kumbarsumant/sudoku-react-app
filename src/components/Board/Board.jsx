@@ -14,16 +14,16 @@ const Cell = ({ value }) => (
 // Each chunk should contain numbers 1-9 exactly once
 /**
  * A 3x3 section of the Sudoku board
- * @param {number[][]} matrix - The complete Sudoku grid
+ * @param {number[][]} board - The complete Sudoku grid
  * @param {number} startRow - Top-left row index (0, 3, or 6)
  * @param {number} startCol - Top-left column index (0, 3, or 6)
  */
-const Chunk = ({ matrix, startRow, startCol }) => {
+const Chunk = ({ board, startRow, startCol }) => {
   const cells = [];
 
   for (let row = startRow; row < startRow + 3; row++) {
     for (let col = startCol; col < startCol + 3; col++) {
-      cells.push(<Cell key={`cell-${row}-${col}`} value={matrix[row][col]} />);
+      cells.push(<Cell key={`cell-${row}-${col}`} value={board[row][col]} />);
     }
   }
 
@@ -33,10 +33,10 @@ const Chunk = ({ matrix, startRow, startCol }) => {
 /**
  * The main Sudoku board component that renders the complete puzzle
  * @param {Object} props
- * @param {number[][]} props.matrix - A 9x9 array representing the Sudoku puzzle.
+ * @param {number[][]} props.board - A 9x9 array representing the Sudoku puzzle.
  * @returns {JSX.Element} A div containing 9 Chunk components arranged in a 9x9 grid
  */
-const Board = ({ matrix }) => {
+const Board = ({ board }) => {
   const chunks = [];
 
   for (let row = 0; row < 9; row += 3) {
@@ -44,7 +44,7 @@ const Board = ({ matrix }) => {
       chunks.push(
         <Chunk
           key={`chunk-${row}-${col}`}
-          matrix={matrix}
+          board={board}
           startRow={row}
           startCol={col}
         />,
@@ -56,7 +56,7 @@ const Board = ({ matrix }) => {
 };
 
 Board.propTypes = {
-  matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  board: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 
 Cell.propTypes = {
@@ -64,7 +64,7 @@ Cell.propTypes = {
 };
 
 Chunk.propTypes = {
-  matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  board: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   startRow: PropTypes.number.isRequired,
   startCol: PropTypes.number.isRequired,
 };
