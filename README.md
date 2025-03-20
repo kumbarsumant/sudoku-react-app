@@ -14,31 +14,33 @@ Welcome to Sudoku Solver, a React-based game that will solve any Sudoku problem 
 
 Ready to dive in? Here's how to get started:
 
-1. Clone the repository:
+1. Ensure you have Node.js (version 12.0 or higher) installed. You can download it from [nodejs.org](https://nodejs.org/).
+
+2. Clone the repository:
 
    ```bash
    git clone https://github.com/kumbarsumant/sudoku-react-app.git
    ```
 
-2. Navigate to the project directory:
+3. Navigate to the project directory:
 
    ```bash
    cd sudoku-react-app
    ```
 
-3. Install the dependencies:
+4. Install the dependencies:
 
    ```bash
    npm install
    ```
 
-4. Start the development server:
+5. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Open your browser and go to [http://localhost:5173](http://localhost:5173) to view the application.
+6. Open your browser and go to [http://localhost:5173](http://localhost:5173) to view the application.
 
 ## Usage
 
