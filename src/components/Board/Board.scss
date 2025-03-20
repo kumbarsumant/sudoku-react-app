@@ -49,5 +49,13 @@ $border-width: 2px;
     &:nth-last-child(-n + 3) {
       border-bottom: none;
     }
+
+    &--selected {
+      background-color: $color-grey-light;
+    }
+
+    &--error {
+      background-color: rgba(red, 0.3) !important;
+    }
   }
 }

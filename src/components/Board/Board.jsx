@@ -1,43 +1,68 @@
 import './Board.scss';
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-// A Cell is a single square in the Sudoku grid that holds a number
-/**
- * A single cell in the Sudoku grid
- * @param {number} value - The number to display (1-9)
- */
-const Cell = ({ value }) => (
-  <div className="board__cell">{value == 0 ? '' : value}</div>
-);
+// Represents a single cell in the Sudoku board.
+const Cell = ({ value, isSelected, row, col, error }) => {
+  const extraClassNames = [];
 
-// A Chunk is one of the nine 3x3 boxes in a Sudoku puzzle
-// Each chunk should contain numbers 1-9 exactly once
-/**
- * A 3x3 section of the Sudoku board
- * @param {number[][]} board - The complete Sudoku grid
- * @param {number} startRow - Top-left row index (0, 3, or 6)
- * @param {number} startCol - Top-left column index (0, 3, or 6)
- */
-const Chunk = ({ board, startRow, startCol }) => {
+  if (isSelected) {
+    extraClassNames.push('board__cell--selected');
+  }
+
+  if (error) {
+    extraClassNames.push('board__cell--error');
+  }
+
+  return (
+    <div
+      className={`board__cell ${extraClassNames.join(' ')}`}
+      data-row={row}
+      data-col={col}
+    >
+      {value == 0 ? '' : value}
+    </div>
+  );
+};
+
+// Represents a 3x3 chunk of cells in the Sudoku board.
+const Chunk = ({ board, startRow, startCol, selectedCell, errorCells }) => {
   const cells = [];
+  const { row: selectedRow, col: selectedCol } = selectedCell;
 
   for (let row = startRow; row < startRow + 3; row++) {
     for (let col = startCol; col < startCol + 3; col++) {
-      cells.push(<Cell key={`cell-${row}-${col}`} value={board[row][col]} />);
+      let errorExists = false;
+      if (errorCells.length > 0) {
+        for (let i = 0; i < errorCells.length; i++) {
+          const errorCell = errorCells[i];
+          if (errorCell.row === row && errorCell.col === col) {
+            errorExists = true;
+            break;
+          }
+        }
+      }
+
+      cells.push(
+        <Cell
+          key={`cell-${row}-${col}`}
+          value={board[row][col]}
+          row={row}
+          col={col}
+          isSelected={row === selectedRow && col === selectedCol}
+          error={errorExists}
+        />,
+      );
     }
   }
 
   return <div className="board__chunk">{cells}</div>;
 };
 
-/**
- * The main Sudoku board component that renders the complete puzzle
- * @param {Object} props
- * @param {number[][]} props.board - A 9x9 array representing the Sudoku puzzle.
- * @returns {JSX.Element} A div containing 9 Chunk components arranged in a 9x9 grid
- */
-const Board = ({ board }) => {
+// Represents the entire Sudoku board.
+const Board = ({ board, selectedCell, onCellSelect, errorCells }) => {
   const chunks = [];
+  const boardRef = useRef(null);
 
   for (let row = 0; row < 9; row += 3) {
     for (let col = 0; col < 9; col += 3) {
@@ -47,12 +72,18 @@ const Board = ({ board }) => {
           board={board}
           startRow={row}
           startCol={col}
+          selectedCell={selectedCell}
+          errorCells={errorCells}
         />,
       );
     }
   }
 
-  return <div className="board">{chunks}</div>;
+  return (
+    <div ref={boardRef} className="board" onClick={onCellSelect}>
+      {chunks}
+    </div>
+  );
 };
 
 Board.propTypes = {
@@ -69,4 +100,5 @@ Chunk.propTypes = {
   startCol: PropTypes.number.isRequired,
 };
 
+// Export the Board component
 export default Board;
