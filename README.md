@@ -2,7 +2,7 @@
 
 Welcome to Sudoku Solver, a React-based game that will solve any Sudoku problem you throw at it! With its intuitive UI and dynamic cell updates, you'll be solving puzzles in no time. [Live Link](https://sudoku-henna-seven.vercel.app/)
 
-![".\README_IMAGES\sudoku-react-app-screenshot.png]
+![image](README_IMAGES/sudoku-react-app-screenshot.png)
 
 ## Features
 
