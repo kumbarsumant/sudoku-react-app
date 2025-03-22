@@ -34,14 +34,14 @@ export default class SudokuSolver {
 
     for (let c = 0; c < 9; c++) {
       if (c === col) continue;
-      if (this.board[row][c] === value) {
+      if (this.board[row][c] % 10 === value % 10) {
         return false;
       }
     }
 
     for (let r = 0; r < 9; r++) {
       if (r === row) continue;
-      if (this.board[r][col] === value) {
+      if (this.board[r][col] % 10 === value % 10) {
         return false;
       }
     }
@@ -52,7 +52,7 @@ export default class SudokuSolver {
     for (let r = startRow; r < startRow + 3; r++) {
       for (let c = startCol; c < startCol + 3; c++) {
         if (c === col && r === col) continue;
-        if (this.board[r][c] === value) {
+        if (this.board[r][c] % 10 === value % 10) {
           return false;
         }
       }
@@ -82,7 +82,7 @@ export default class SudokuSolver {
       col = 0;
     }
 
-    if (this.board[row][col] !== 0) {
+    if (this.board[row][col] % 10 !== 0) {
       return this.solveHelper(row, col + 1);
     }
 
@@ -104,6 +104,7 @@ export default class SudokuSolver {
   }
 
   solve() {
+    console.log(this.board);
     this.solveHelper(0, 0);
   }
 }
