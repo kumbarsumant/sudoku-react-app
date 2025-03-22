@@ -101,7 +101,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1 className="heading">Sudoku Solver</h1>
+      <h1 className="heading mg--b--md">Sudoku Solver</h1>
       <div className="app__container">
         <div className="app__board">
           <Board

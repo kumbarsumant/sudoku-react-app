@@ -14,7 +14,7 @@ Welcome to Sudoku Solver, a React-based game that will solve any Sudoku problem 
 
 Ready to dive in? Here's how to get started:
 
-1. Ensure you have Node.js (version 12.0 or higher) installed. You can download it from [nodejs.org](https://nodejs.org/).
+1. Ensure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
 
 2. Clone the repository:
 

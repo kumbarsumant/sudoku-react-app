@@ -32,3 +32,14 @@ body {
 }
 
 // UTILITIES
+.mg {
+  &--b {
+    &--sm {
+      margin-bottom: 2rem;
+    }
+
+    &--md {
+      margin-bottom: 5rem;
+    }
+  }
+}
