@@ -10,7 +10,7 @@ import { ACTIONS } from '../../constants';
  * - Erase: Erases selected cells
  * - Solve: Triggers the solving algorithm
  */
-const BoardController = ({ onClick, disableSolve }) => {
+const BoardController = ({ onClick, disableSolve, disableErase }) => {
   return (
     <div className="board__controller">
       {/* Reset Button */}
@@ -26,7 +26,7 @@ const BoardController = ({ onClick, disableSolve }) => {
 
       {/* Erase Button */}
       <button
-        className="button button--action"
+        className={`button button--action ${disableErase ? 'button--action--disabled' : ''}`}
         onClick={() => onClick(ACTIONS.ERASE)}
       >
         <div className="button__container">
@@ -38,6 +38,7 @@ const BoardController = ({ onClick, disableSolve }) => {
       {/* Solve Button */}
       <button
         className={`button button--action ${disableSolve ? 'button--action--disabled' : ''}`}
+        disabled={disableSolve}
         onClick={() => onClick(ACTIONS.SOLVE)}
       >
         <div className="button__container">

@@ -12,9 +12,12 @@ const App = () => {
   const [board, setBoard] = useState(new SudokuSolver().board);
   const [selectedCell, setSelectedCell] = useState({ row: 0, col: 0 });
   const [errorCells, setErrorCells] = useState([]);
+  const [isSolved, setIsSolved] = useState(false);
 
   const updateBoard = (row, col, value) => {
+    if (isSolved) return;
     const sudoku = sudokuRef.current;
+    value = value + 10;
     try {
       sudoku.setCellValue(row, col, value);
       setBoard(sudoku.getBoard());
@@ -37,12 +40,14 @@ const App = () => {
     const sudoku = sudokuRef.current;
     sudoku.solve();
     setBoard(sudoku.getBoard());
+    setIsSolved(true);
   };
 
   const resetBoard = () => {
     const sudoku = sudokuRef.current;
     sudoku.reset();
     setBoard(sudoku.getBoard());
+    setIsSolved(false);
   };
 
   useEffect(() => {
@@ -59,9 +64,9 @@ const App = () => {
         if (moveResult) {
           setSelectedCell({ ...selectedCell, ...moveResult });
         }
-      } else if (!isNaN(event.key)) {
+      } else if (!isNaN(event.key) && !isSolved) {
         updateBoard(row, col, Number(event.key));
-      } else if (event.key === 'Backspace') {
+      } else if (event.key === 'Backspace' && !isSolved) {
         updateBoard(row, col, 0);
       }
     };
@@ -114,8 +119,9 @@ const App = () => {
             <BoardController
               onClick={onActionButtonClick}
               disableSolve={errorCells.length > 0}
+              disableErase={isSolved}
             />
-            <NumberPad onNumberClick={onNumberClick} />
+            <NumberPad onNumberClick={onNumberClick} disabled={isSolved} />
           </div>
         </div>
       </div>

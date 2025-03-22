@@ -30,7 +30,7 @@ export default class SudokuSolver {
   }
 
   isSafe(row, col, value) {
-    if (value === 0) return true;
+    if (value % 10 === 0) return true;
 
     for (let c = 0; c < 9; c++) {
       if (c === col) continue;
@@ -62,7 +62,7 @@ export default class SudokuSolver {
 
   setCellValue(row, col, value) {
     if (this.isSafe(row, col, value)) {
-      this.validate(row, col, value);
+      this.validate(row, col, value % 10);
       this.board[row][col] = value;
       return;
     }

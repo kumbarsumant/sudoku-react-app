@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 // Represents a single cell in the Sudoku board.
 const Cell = ({ value, isSelected, row, col, error }) => {
   const extraClassNames = [];
+  const cellValue = value % 10;
 
   if (isSelected) {
     extraClassNames.push('board__cell--selected');
@@ -14,13 +15,17 @@ const Cell = ({ value, isSelected, row, col, error }) => {
     extraClassNames.push('board__cell--error');
   }
 
+  if (value > 10) {
+    extraClassNames.push('board__cell--freeze');
+  }
+
   return (
     <div
       className={`board__cell ${extraClassNames.join(' ')}`}
       data-row={row}
       data-col={col}
     >
-      {value == 0 ? '' : value}
+      {cellValue === 0 ? '' : cellValue}
     </div>
   );
 };

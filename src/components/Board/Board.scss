@@ -38,8 +38,8 @@ $border-width: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid rgba($color-grey, 0.5);
-    border-bottom: 1px solid rgba($color-grey, 0.5);
+    border-right: 1px solid $color-grey-light;
+    border-bottom: 1px solid $color-grey-light;
     font-size: 2rem;
     font-weight: 500;
 
@@ -55,7 +55,13 @@ $border-width: 2px;
     }
 
     &--error {
-      background-color: rgba(red, 0.3) !important;
+      color: $color-error !important;
+      background-color: rgba($color-error, 0.2) !important;
+    }
+
+    &--freeze {
+      color: $color-white;
+      background-color: $color-primary-light;
     }
   }
 }
